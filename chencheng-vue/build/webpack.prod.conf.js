@@ -34,6 +34,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env
     }),
+    new ExtractTextPlugin('style.css'),
     new UglifyJsPlugin({
       uglifyOptions: {
         compress: {

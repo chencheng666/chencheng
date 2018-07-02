@@ -1,0 +1,101 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?f1m6j');
+  src:  url('fonts/icomoon.eot?f1m6j#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?f1m6j') format('truetype'),
+    url('fonts/icomoon.woff?f1m6j') format('woff'),
+    url('fonts/icomoon.svg?f1m6j#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-home2:before {
+  content: "\e901";
+}
+.icon-office:before {
+  content: "\e903";
+}
+.icon-pencil:before {
+  content: "\e905";
+}
+.icon-images:before {
+  content: "\e90e";
+}
+.icon-camera:before {
+  content: "\e90f";
+}
+.icon-headphones:before {
+  content: "\e910";
+}
+.icon-music:before {
+  content: "\e911";
+}
+.icon-play:before {
+  content: "\e912";
+}
+.icon-video-camera:before {
+  content: "\e914";
+}
+.icon-bullhorn:before {
+  content: "\e91a";
+}
+.icon-connection:before {
+  content: "\e91b";
+}
+.icon-mic:before {
+  content: "\e91e";
+}
+.icon-qrcode:before {
+  content: "\e938";
+}
+.icon-location2:before {
+  content: "\e948";
+}
+.icon-compass:before {
+  content: "\e949";
+}
+.icon-mobile:before {
+  content: "\e958";
+}
+.icon-bubble:before {
+  content: "\e96b";
+}
+.icon-bubbles2:before {
+  content: "\e96d";
+}
+.icon-spinner10:before {
+  content: "\e983";
+}
+.icon-search:before {
+  content: "\e986";
+}
+.icon-wrench:before {
+  content: "\e991";
+}
+.icon-cog:before {
+  content: "\e994";
+}
+.icon-heart:before {
+  content: "\e9da";
+}
+.icon-loop2:before {
+  content: "\ea2e";
+}
+.icon-github:before {
+  content: "\eab0";
+}
