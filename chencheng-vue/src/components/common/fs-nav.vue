@@ -2,7 +2,7 @@
     <Menu mode="horizontal" theme="dark" active-name="1">
         <div class="layout-logo" @click="goHome()">求索</div>
         <div class="layout-nav">
-        <MenuItem v-for="(item, index) in menuItems" :name="index" :key="index">
+        <MenuItem v-for="(item, index) in menuItems" :name="index" :key="index" @click.native="item.onclick()">
         <Icon :type="item.icon"></Icon>{{item.text}}
         </MenuItem>
         <!-- 消息 -->
@@ -39,11 +39,14 @@ import FsContent from '@/components/common/fs-content'
         },
         methods: {
           init() {
+            let _this = this;
             this.menuItems = [
-              {text:'JS', code:'js', icon:'ios-navigate'},
-              {text:'CSS', code:'css', icon:'ios-keypad'},
-              {text:'HTML', code:'html', icon:'ios-analytics'},
-              {text:'写文章', code:'write', icon:'ios-paper'}
+              {text:'JS', code:'js', icon:'ios-navigate', onclick: ''},
+              {text:'CSS', code:'css', icon:'ios-keypad', onclick: ''},
+              {text:'HTML', code:'html', icon:'ios-analytics', onclick: ''},
+              {text:'写文章', code:'write', icon:'ios-paper', onclick() {
+                _this.goWrite();
+              }}
             ];
             this.dropList = [
               {text:'git地址', code:'git', icon:'ios-navigate'},
@@ -58,7 +61,13 @@ import FsContent from '@/components/common/fs-content'
               name: 'home'
             });
             // this.$router.go(-1);
-          }
+          },
+          goWrite() {
+            this.$router.push({
+              name: 'contentWrite'
+            });
+            // this.$router.go(-1);
+          },
         },
         created() {
           this.init();

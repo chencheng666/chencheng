@@ -37,9 +37,16 @@ router.get('/detail', async (ctx, next) => { // 文章详细
   });
 })
 
-router.get('/add', async (ctx, next) => { // 添加文章
-  await db.get('content').insert([
-    {title:'两年，60万字，说说写作“失败者”的感悟', content:'五一当天，简书给我发过来我的两周年创作提醒，把我吓了一跳，不知不觉两年过去了，就这样漫无目的的写了将近60万字，真的是五一劳动节很好的一个礼物，说明自己一直在“码农”的路上辛勤的耕耘着，唯一的遗憾是依旧没有签约，依旧没有“红”，依旧在自己平凡的工作和生活中平凡的活着，好“失败”。', image:'https://upload-images.jianshu.io/upload_images/1994601-c1db6b8f374f8b4d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', meta: {userName: '大漠孤烟直', likeNum:'20', replyNum: '114'}},
+router.post('/add', async (ctx, next) => { // 添加文章
+  ctx.request.body && await db.get('content').insert([
+    {
+      title: ctx.request.body.title,
+      image: ctx.request.body.cover,
+      type: ctx.request.body.type,
+      category: ctx.request.body.category,
+      content: ctx.request.body.content,
+      meta: ctx.request.body.meta
+    }
   ]).then(res => {
     ctx.response.body = {
       result: {code: 'success', msg: '成功', cb: res}

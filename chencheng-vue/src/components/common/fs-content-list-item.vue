@@ -5,13 +5,13 @@
             <div class="item-content">{{data.content}}</div>
             <div class="item-footer">
                 <div class="footer-item">
-                    <Icon type="heart"></Icon>&nbsp;{{data.meta.userName || '陈成'}}
+                    <Icon type="heart"></Icon>&nbsp;{{data.meta && data.meta.userName || '陈成'}}
                 </div>
                 <div class="footer-item">
-                    <Icon type="heart"></Icon>&nbsp;{{data.meta.likeNum || '0'}}
+                    <Icon type="heart"></Icon>&nbsp;{{data.meta && data.meta.likeNum || '0'}}
                 </div>
                 <div class="footer-item">
-                    <Icon type="heart"></Icon>&nbsp;{{data.meta.replyNum || '0'}}
+                    <Icon type="heart"></Icon>&nbsp;{{data.meta && data.meta.replyNum || '0'}}
                 </div>
             </div>
         </div>
