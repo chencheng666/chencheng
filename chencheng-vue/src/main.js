@@ -8,6 +8,11 @@ import router from './router' // 路由引入
 import '@/assets/css/common.css' // 引入公共样式
 import iView from 'iview'; // 引入iview ui
 import 'iview/dist/styles/iview.css'; // 引入iview ui css
+import axios from 'axios' // ajax请求
+
+axios.defaults.baseURL='http://127.0.0.1:3000';
+
+Vue.prototype.$http = axios
 Vue.config.productionTip = false;
 
 // 全局组件注册
@@ -15,7 +20,6 @@ Vue.component('fs-nav', FsNav);
 Vue.component('fs-footer', FsFooter);
 
 Vue.use(iView);
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

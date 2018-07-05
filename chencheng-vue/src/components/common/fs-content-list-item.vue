@@ -1,5 +1,5 @@
 <template>
-    <div class="list-item">
+    <div class="list-item" @click.stop="goDetail(data)">
         <div class="item-left">
             <div class="item-header">{{data.title}}</div>
             <div class="item-content">{{data.content}}</div>
@@ -29,7 +29,15 @@ export default {
         }
     },
     methods: {
-
+        goDetail() {
+            let _this = this;
+            this.$router.push({
+                name: 'contentDetail',
+                query: {
+                    _id: _this.data._id
+                }
+            });
+        }
     },
     created() {
         console.log(this.data);
