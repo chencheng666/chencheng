@@ -17,7 +17,6 @@ router.get('/', async (ctx, next) => { // 获取文章列表
 })
 
 router.get('/detail', async (ctx, next) => { // 文章详细
-  console.log(ctx.request.query,'detail');
   let queryParams = {
   }
   if(ctx.request.query && ctx.request.query._id) {
@@ -26,7 +25,6 @@ router.get('/detail', async (ctx, next) => { // 文章详细
     return;
   }
   await db.get('content').findOne({'_id': queryParams._id}).then(docs => {
-    console.log(docs, 'docs');
     ctx.response.body = {
       result: {data: docs}
     }
@@ -58,9 +56,9 @@ router.post('/add', async (ctx, next) => { // 添加文章
   });
 })
 
-router.post('delete', async (ctx, next) => { // 删除
+router.post('/delete', async (ctx, next) => { // 删除
   ctx.request.body && await db.get('content').remove({
-    _id: ctx.request.body.id,
+    _id: ctx.request.body.contentId,
   }).then(res => {
     ctx.response.body = {
       result: {code: 'success', msg: '成功', cb: res}
@@ -71,5 +69,4 @@ router.post('delete', async (ctx, next) => { // 删除
     }
   });
 })
-
 module.exports = router
