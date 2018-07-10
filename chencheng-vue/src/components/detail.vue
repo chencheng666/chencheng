@@ -1,5 +1,6 @@
 <template>
   <div class="content-detail">
+    <div class="content-del" @click="delData()">删除</div>
     <div class="title">
       {{detaiData.title}}
     </div>
@@ -36,6 +37,20 @@
                 if(res && res.data && res.data.result) {
                     this.detaiData = res.data.result.data;
                 }
+            }).catch(e => {
+                console.log(e, 'e');
+            });
+          },
+          delData() {
+            let data = {
+              contentId: this.$route.query._id
+            };
+            this.$http.post('/content/delete', data).then(res => {
+                console.log(res, 'res');
+                this.$router.go(-1);
+                // if(res && res.data && res.data.result) {
+                //     this.detaiData = res.data.result.data;
+                // }
             }).catch(e => {
                 console.log(e, 'e');
             });
