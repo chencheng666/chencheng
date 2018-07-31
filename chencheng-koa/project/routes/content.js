@@ -1,6 +1,7 @@
 const router = require('koa-router')()
-// const ObjectID = require('mongodb').ObjectID;
-const db = require('monk')('localhost:27017/blog'); // mongodb 链接
+const monk = require('monk');
+const db = monk('localhost:27017/blog'); // mongodb 链接
+// const id = monk.id('4ee0fd75d6bd52107c000118')
 
 router.prefix('/content')
 

@@ -54,6 +54,7 @@ export default {
         flex: 1;
         color: #80848f;
         padding: 10px;
+        overflow: hidden;
         .item-header {
             font-size: 16px;
             color: #1c2438;
@@ -83,6 +84,8 @@ export default {
     .item-right {
         flex: 0 0 200px;
         font-size: 0px;
+        overflow: hidden;
+        max-height: 120px;
         img {
             width: 100%;
             border-radius: 5px;
