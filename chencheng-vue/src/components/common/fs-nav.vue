@@ -1,14 +1,17 @@
 <template>
     <Menu mode="horizontal" theme="dark" active-name="1">
         <div class="layout-logo" @click="goHome()">求索</div>
+        <div class="layout-search">
+			<fs-search></fs-search>
+        </div>
         <div class="layout-nav">
-        <MenuItem v-for="(item, index) in menuItems" :name="index" :key="index" @click.native="item.onclick()">
-        <Icon :type="item.icon"></Icon>{{item.text}}
-        </MenuItem>
-        <!-- 消息 -->
-        <Badge dot>
-            <Icon type="ios-bell-outline" size="26" style="color:#fff;font-size:18px"></Icon>
-        </Badge>
+          <MenuItem v-for="(item, index) in menuItems" :name="index" :key="index" @click.native="item.onclick()">
+          <Icon :type="item.icon"></Icon>{{item.text}}
+          </MenuItem>
+          <!-- 消息 -->
+          <Badge dot>
+              <Icon type="ios-bell-outline" size="26" style="color:#fff;font-size:18px"></Icon>
+          </Badge>
         </div>
         <!-- 头像 -->
         <div class="layout-avatar">
@@ -27,64 +30,71 @@
 </template>
 <script>
 import FsContent from '@/components/common/fs-content'
-    export default {
-        data() {
-          return {
-            menuItems: null,
-            dropList: null,
-          }
-        },
-        components: {
-          FsContent
-        },
-        methods: {
-          init() {
-            let _this = this;
-            this.menuItems = [
-              {text:'JS', code:'js', icon:'ios-navigate', onclick: ''},
-              {text:'CSS', code:'css', icon:'ios-keypad', onclick: ''},
-              {text:'HTML', code:'html', icon:'ios-analytics', onclick: ''},
-              {text:'写文章', code:'write', icon:'ios-paper', onclick() {
-                _this.goWrite();
-              }}
-            ];
-            this.dropList = [
-              {text:'git地址', code:'git', icon:'ios-navigate',onclick() {
-                window.open("https://github.com/chencheng666/chencheng");
-              }},
-              {text:'资料整理', code:'css', icon:'ios-keypad',onclick() {
-                window.open('https://www.baidu.com');
-              }},
-              {text:'路线图', code:'html', icon:'ios-analytics',onclick() {
-                window.open('https://www.baidu.com');
-              }},
-              {text:'讨论区', code:'note', icon:'ios-paper',onclick() {
-                window.open('https://www.baidu.com');
-              }},
-              {text:'反馈', code:'note', icon:'ios-paper',onclick() {
-                window.open('https://www.baidu.com');
-              }},
-            ];
-          },
-          goHome() {
-            this.$router.push({
-              name: 'home'
-            });
-            // this.$router.go(-1);
-          },
-          goWrite() {
-            this.$router.push({
-              name: 'contentWrite'
-            });
-            // this.$router.go(-1);
-          },
-        },
-        created() {
-          this.init();
-        }
+import FsSearch from '@/components/common/fs-search'
+export default {
+    data() {
+      return {
+        menuItems: null,
+        dropList: null,
+      }
+    },
+    components: {
+	  FsContent,
+	  FsSearch
+    },
+    methods: {
+      init() {
+        let _this = this;
+        this.menuItems = [
+          {text:'JS', code:'js', icon:'ios-navigate', onclick: ''},
+          {text:'CSS', code:'css', icon:'ios-keypad', onclick: ''},
+          {text:'HTML', code:'html', icon:'ios-analytics', onclick: ''},
+          {text:'写文章', code:'write', icon:'ios-paper', onclick() {
+            _this.goWrite();
+          }}
+        ];
+        this.dropList = [
+          {text:'git地址', code:'git', icon:'ios-navigate',onclick() {
+            window.open("https://github.com/chencheng666/chencheng");
+          }},
+          {text:'资料整理', code:'css', icon:'ios-keypad',onclick() {
+            window.open('https://www.baidu.com');
+          }},
+          {text:'路线图', code:'html', icon:'ios-analytics',onclick() {
+            window.open('https://www.baidu.com');
+          }},
+          {text:'讨论区', code:'note', icon:'ios-paper',onclick() {
+            window.open('https://www.baidu.com');
+          }},
+          {text:'反馈', code:'note', icon:'ios-paper',onclick() {
+            window.open('https://www.baidu.com');
+          }},
+        ];
+      },
+      goHome() {
+        this.$router.push({
+          name: 'home'
+        });
+        // this.$router.go(-1);
+      },
+      goWrite() {
+        this.$router.push({
+          name: 'contentWrite'
+        });
+        // this.$router.go(-1);
+      },
+    },
+    created() {
+      this.init();
     }
+}
 </script>
 <style lang="less" scoped>
+.layout-search {
+	display: inline-block;
+	position: absolute;
+	left: 200px;
+}
 .layout-logo{
     width: 100px;
     height: 30px;

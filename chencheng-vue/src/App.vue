@@ -12,7 +12,7 @@
         <BackTop></BackTop>
       </Content>
       <!-- 底部 -->
-      <Footer class="layout-footer-center">2018-2020 &copy; 后宫群</Footer>
+      <Footer class="layout-footer-center">2018-2020 &copy;chencheng</Footer>
     </Layout>
   </div>
 </template>

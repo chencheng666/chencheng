@@ -6,7 +6,12 @@ const db = monk('localhost:27017/blog'); // mongodb 链接
 router.prefix('/content')
 
 router.get('/', async (ctx, next) => { // 获取文章列表
-  await db.get('content').find({}).then(docs => {
+  let queryParams = {
+  }
+  if(ctx.request.query && ctx.request.query.keyword) {
+    queryParams.title = new RegExp(`${decodeURI(ctx.request.query.keyword)}`);
+  }
+  await db.get('content').find(queryParams).then(docs => {
     ctx.response.body = {
       result: {contentList: docs}
     }
