@@ -11,6 +11,9 @@
                     <a class="delete-his" @click="removeHis(index)">删除</a>
                 </div>
             </div>
+            <div class="search-empty" v-if="!hislistData.length">
+                暂无搜索记录
+            </div>
         </div>
     </div>
 </template>
@@ -102,6 +105,10 @@ export default {
         top: 60px;
         line-height: 20px;
         box-shadow: #e7e7e7 1px 1px;
+        .search-empty {
+            padding: 20px;
+            text-align: center;
+        }
         &::before {
             position: absolute;
             top: -30px;
@@ -115,6 +122,7 @@ export default {
         }
         .his-title {
             width: 300px;
+            text-align: center;
             color: #99999999;
         }
         .his-item {
