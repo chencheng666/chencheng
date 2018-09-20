@@ -68,6 +68,7 @@
         width: 100%;
         height: 500px;
         background: url('../../assets/nodata.gif');
+        background-position: center;
     }
 }
 </style>
