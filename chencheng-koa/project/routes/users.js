@@ -40,7 +40,32 @@ router.get('/detail', async (ctx, next) => { // 用户详细
     }
   });
 })
-
+router.post('/update', async (ctx, next) => { // 更新用户信息
+  ctx.request.body && await db.get('user').update(
+    { 
+      _id: ctx.request.body._id 
+    },
+    {
+      $set:{
+        name: ctx.request.body.name || '',
+        mobile: ctx.request.body.mobile || '',
+        email: ctx.request.body.email || '',
+        gender: ctx.request.body.gender || '',
+        avatar: ctx.request.body.avatar || '',
+        address: ctx.request.body.address || '',
+        description: ctx.request.body.description || '',
+      }
+  }
+  ).then(res => {
+    ctx.response.body = {
+      result: {code: 'success', msg: '用户信息更新成功', cb: res}
+    }
+  }).catch(e => {
+    ctx.response.body = {
+      result: {code: 'error', msg: '用户信息更新失败', cb: e}
+    }
+  });
+})
 router.post('/signup', async (ctx, next) => { // 添加用户
   ctx.request.body && await db.get('user').insert([
     {

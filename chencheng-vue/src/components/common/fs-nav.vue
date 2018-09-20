@@ -33,6 +33,20 @@
 			<fs-login
       @hideModal='hideModal'></fs-login>
 		</Modal>
+
+    <Modal v-model="isQuit" width="360" >
+        <p slot="header" style="color:#f60;text-align:center">
+            <Icon type="ios-information-circle"></Icon>
+            <span>退出登录</span>
+        </p>
+        <div style="text-align:center">
+            <p>退出登录将无法参与评论</p>
+            <p>仍要退出登录吗?</p>
+        </div>
+        <div slot="footer">
+            <Button type="error" size="large" long @click="confirmQuit()">确认</Button>
+        </div>
+    </Modal>
     </Menu>
 </template>
 <script>
@@ -45,6 +59,7 @@ export default {
         menuItems: null,
         dropList: null,
         showLogin:false,
+        isQuit: false,
       }
     },
     components: {
@@ -59,11 +74,12 @@ export default {
       }
     },
     methods: {
-      hideModal() {
+      hideModal() { // 隐藏模态框
         setTimeout(() => {
             document.querySelector('.ivu-modal-wrap').dispatchEvent(new Event('click'));
-            this.$Modal.remove();
+            // this.$Modal.remove();
         }, 200);
+        this.init();
       },
       init() {
         let _this = this;
@@ -92,9 +108,14 @@ export default {
             window.open('https://www.baidu.com');
           }},
         ];
-        if(this.getUserInfo && this.getUserInfo.userName) { // 已登录状态显示个人中心
+        if(this.getUserInfo && Object.keys(this.getUserInfo).length) { // 已登录状态显示个人中心
           this.dropList.push({text:'个人中心', code:'note', icon:'ios-paper',onclick() {
-            window.open('https://www.baidu.com');
+            _this.$router.push({
+              name: 'my'
+            });
+          }});
+          this.dropList.push({text:'退出登录', code:'note', icon:'ios-paper',onclick() {
+            _this.quit();
           }});
         } else { // 未登录显示登录、注册
           this.dropList.push({text:'登录/注册', code:'note', icon:'ios-paper',onclick() {
@@ -102,13 +123,27 @@ export default {
           }});
         }
       },
-      goHome() {
+      quit() { //退出登录
+        this.isQuit = true;
+      },
+      confirmQuit() { // 登录确认
+        localStorage.removeItem('userInfo');
+        this.$store.dispatch('save',{});
+        document.querySelector('.ivu-modal-wrap').dispatchEvent(new Event('click'));
+        this.init();
+        // this.hideModal();
+        this.$Notice.success({
+            title: '退出成功',
+        });
+        this.$Modal.remove();
+      },
+      goHome() { // 回主页
         this.$router.push({
           name: 'home'
         });
         // this.$router.go(-1);
       },
-      goWrite() {
+      goWrite() {  // 写文章
         this.$router.push({
           name: 'contentWrite'
         });

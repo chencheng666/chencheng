@@ -1,7 +1,7 @@
 <template>
-    <div class="list-item" @click.stop="goDetail(data)">
+    <div class="list-item">
         <div class="item-left">
-            <div class="item-header">{{data.title}}</div>
+            <div class="item-header" @click.stop="goDetail(data)">{{data.title}}</div>
             <div class="item-content">{{data.content}}</div>
             <div class="item-footer">
                 <div class="footer-item">
@@ -63,6 +63,11 @@ export default {
             overflow: hidden;
             text-overflow:ellipsis;
             white-space: nowrap;
+            cursor: pointer;
+            &:hover {
+                color: #3e76f6;
+                text-decoration: underline;
+            }
         }
         .item-content {
             font-size: 13px;
