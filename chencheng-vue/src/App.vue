@@ -31,6 +31,10 @@
         },
         methods: {
           init() {
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            if(userInfo && userInfo.avatar) {
+              this.$store.dispatch('save',userInfo);
+            }
           },
         },
         created() {

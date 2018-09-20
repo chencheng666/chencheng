@@ -9,7 +9,7 @@ import '@/assets/css/common.css' // 引入公共样式
 import iView from 'iview'; // 引入iview ui
 import 'iview/dist/styles/iview.css'; // 引入iview ui css
 import axios from 'axios' // ajax请求
-
+import store from './store'
 axios.defaults.baseURL='http://127.0.0.1:3000';
 
 Vue.prototype.$http = axios
@@ -24,6 +24,7 @@ Vue.use(iView);
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

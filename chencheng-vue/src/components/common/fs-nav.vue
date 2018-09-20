@@ -15,34 +15,56 @@
         </div>
         <!-- 头像 -->
         <div class="layout-avatar">
-        <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
-        <Dropdown trigger="click" style="margin-left: 20px">
-            <a href="javascript:void(0)">
-            <Icon type="arrow-down-b" style="color: rgba(255,255,255,.7);"></Icon>
-            </a>
-            <!-- 下拉菜单 -->
-            <DropdownMenu slot="list">
-            <DropdownItem v-for="(item, index) in dropList" :key="index" @click.native="item.onclick()">{{item.text}}</DropdownItem>
-            </DropdownMenu>
-        </Dropdown>
+			<Avatar :src="getUserInfo.avatar"/>
+			<Dropdown trigger="click" style="margin-left: 20px">
+				<a href="javascript:void(0)">
+				<Icon type="arrow-down-b" style="color: rgba(255,255,255,.7);"></Icon>
+				</a>
+				<!-- 下拉菜单 -->
+				<DropdownMenu slot="list">
+				<DropdownItem v-for="(item, index) in dropList" :key="index" @click.native="item.onclick()">{{item.text}}</DropdownItem>
+				</DropdownMenu>
+			</Dropdown>
         </div>
+		<Modal
+			v-model="showLogin"
+			footer-hide	
+			title="登录/注册">
+			<fs-login
+      @hideModal='hideModal'></fs-login>
+		</Modal>
     </Menu>
 </template>
 <script>
 import FsContent from '@/components/common/fs-content'
 import FsSearch from '@/components/common/fs-search'
+import FsLogin from '@/components/login/index'
 export default {
     data() {
       return {
         menuItems: null,
         dropList: null,
+        showLogin:false,
       }
     },
     components: {
-	  FsContent,
-	  FsSearch
+      FsContent,
+      FsSearch,
+      FsLogin
+    },
+    computed: {
+      getUserInfo() {
+        let userInfo = this.$store.state.userInfo.result;
+        return userInfo;
+      }
     },
     methods: {
+      hideModal() {
+        setTimeout(() => {
+            document.querySelector('.ivu-modal-wrap').dispatchEvent(new Event('click'));
+            this.$Modal.remove();
+        }, 200);
+      },
       init() {
         let _this = this;
         this.menuItems = [
@@ -70,6 +92,15 @@ export default {
             window.open('https://www.baidu.com');
           }},
         ];
+        if(this.getUserInfo && this.getUserInfo.userName) { // 已登录状态显示个人中心
+          this.dropList.push({text:'个人中心', code:'note', icon:'ios-paper',onclick() {
+            window.open('https://www.baidu.com');
+          }});
+        } else { // 未登录显示登录、注册
+          this.dropList.push({text:'登录/注册', code:'note', icon:'ios-paper',onclick() {
+            _this.showLogin = true;
+          }});
+        }
       },
       goHome() {
         this.$router.push({
@@ -82,7 +113,7 @@ export default {
           name: 'contentWrite'
         });
         // this.$router.go(-1);
-      },
+	  },
     },
     created() {
       this.init();

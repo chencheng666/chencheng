@@ -20,6 +20,6 @@ export default new Router({
       path: '/write',
       name: 'contentWrite',
       component: write
-    },
+    }
   ]
 })
