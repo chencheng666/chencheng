@@ -22,7 +22,14 @@
         <div class="article-item article-title">
             <div class="left">邮箱</div>
             <div class="right">
-                <Input v-model="detailData.email" placeholder="请输入邮箱" style="width: 300px"></Input>
+                <!-- <Input v-model="detailData.email" placeholder="请输入邮箱" style="width: 300px"></Input> -->
+                <AutoComplete
+                    v-model="detailData.email"
+                    placeholder="请输入邮箱"
+                    @on-search="handleSearch"
+                    style="width:300px">
+                    <Option v-for="item in emailList" :value="item" :key="item">{{ item }}</Option>
+                </AutoComplete>
             </div>
         </div>
         <div class="article-item article-cover">
@@ -58,11 +65,19 @@
         data() {
           return {
             detailData: {},
+            emailList: [],
           }
         },
         components: {
         },
         methods: {
+            handleSearch (value) {
+                this.emailList = !value || value.indexOf('@') >= 0 ? [] : [
+                    value + '@qq.com',
+                    value + '@sina.com',
+                    value + '@163.com'
+                ];
+            },
           init() { // 初始化
             this.getDetailData();
           },

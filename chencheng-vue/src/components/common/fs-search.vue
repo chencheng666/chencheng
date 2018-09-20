@@ -1,8 +1,8 @@
 <template>
     <div class="search">
         <input type="text" placeholder="搜索" @focus="getFocus()" v-model="searchValue" class="search-input" @keyup.enter="search()">
-        <span class="icon-search" @click="search()">
-        </span>
+        <!-- <span class="icon-search" @click="search()">
+        </span> -->
         <div class="his-list" v-if="showHistory && hislistData">
             <div class="his-title">搜索历史</div>
             <div class="his-item" v-for="(item,index) in hislistData" :key="index" v-if="index < 5">
@@ -92,7 +92,7 @@ export default {
         text-indent: 0px;
         text-shadow: none;
         &:focus {
-            // width:220px;
+            width:220px;
             outline: none;
         }
     }
