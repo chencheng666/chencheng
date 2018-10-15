@@ -14,20 +14,30 @@
       <!-- 底部 -->
       <Footer class="layout-footer-center">2018-2020 &copy;chencheng</Footer>
     </Layout>
+    <div class="fixed-block" draggable="true" @click="isActive=!isActive">
+      <!-- <fs-audio></fs-audio> -->
+      来点音乐🎵
+    </div>
+    <div class="wangyi-music" :style="isActive?'right:0px':''">
+      <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=2451714141&auto=1&height=430"></iframe>
+    </div>
   </div>
 </template>
 <script>
     import FsContent from '@/components/common/fs-content'
+    import FsAudio from '@/components/common/fs-audio'
     export default {
         name: 'App',
         data() {
           return {
             menuItems: null,
             dropList: null,
+            isActive:false
           }
         },
         components: {
-          FsContent
+          FsContent,
+          FsAudio,
         },
         methods: {
           init() {
@@ -51,6 +61,21 @@
         overflow: hidden;
         .layout-footer-center{
             text-align: center;
+        }
+        .fixed-block {
+          position: fixed;
+          // width: 100px;
+          // height: 100px;
+          right: 0px;
+        }
+        .wangyi-music {
+          position: fixed;
+          right: -330px;
+          top: 200px;
+          transition: right 1s;
+          .active {
+            right: 0px;
+          }
         }
     }
 </style>
