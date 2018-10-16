@@ -25,7 +25,7 @@
 </template>
 <script>
     import FsContent from '@/components/common/fs-content'
-    import FsAudio from '@/components/common/fs-audio'
+    // import FsAudio from '@/components/common/fs-audio'
     export default {
         name: 'App',
         data() {
@@ -37,7 +37,7 @@
         },
         components: {
           FsContent,
-          FsAudio,
+          // FsAudio,
         },
         methods: {
           init() {
@@ -49,6 +49,13 @@
         },
         created() {
           this.init();
+
+          // 添加监听事件 隐藏网易播放器
+          document.addEventListener('click', (e) => {
+            if(e.target.className !== 'fixed-block') {
+              this.isActive = false;
+            }
+          })
         }
     }
 </script>
