@@ -71,6 +71,7 @@
         .wangyi-music {
           position: fixed;
           right: -330px;
+          z-index: 11;
           top: 200px;
           transition: right 1s;
           .active {
