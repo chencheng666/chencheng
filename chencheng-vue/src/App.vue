@@ -16,7 +16,7 @@
     </Layout>
     <div class="fixed-block" draggable="true" @click="isActive=!isActive">
       <!-- <fs-audio></fs-audio> -->
-      来点音乐🎵
+      <div class="icon-music" @click="isActive=!isActive"></div>
     </div>
     <div class="wangyi-music" :style="isActive?'right:0px':''">
       <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=2451714141&auto=1&height=430"></iframe>
@@ -60,6 +60,15 @@
     }
 </script>
 <style scoped lang="less">
+
+    @keyframes rotate {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
     .layout{
         border: 1px solid #d7dde4;
         background: #f5f7f9;
@@ -74,6 +83,12 @@
           // width: 100px;
           // height: 100px;
           right: 0px;
+          cursor: pointer;
+          padding: 8px;
+          .icon-music {
+            font-size: 16px;
+            animation: rotate 1s linear infinite;
+          }
         }
         .wangyi-music {
           position: fixed;
