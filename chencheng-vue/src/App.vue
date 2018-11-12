@@ -19,7 +19,7 @@
       <div class="icon-music" @click="isActive=!isActive"></div>
     </div>
     <div class="wangyi-music" :style="isActive?'right:0px':''">
-      <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=2451714141&auto=1&height=430"></iframe>
+      <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=2460207721&auto=1&height=430"></iframe>
     </div>
   </div>
 </template>
