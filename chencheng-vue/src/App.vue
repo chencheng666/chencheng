@@ -60,45 +60,44 @@
     }
 </script>
 <style scoped lang="less">
-
-    @keyframes rotate {
-        from {
-            transform: rotate(0deg);
-        }
-        to {
-            transform: rotate(360deg);
-        }
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
     }
-    .layout{
-        border: 1px solid #d7dde4;
-        background: #f5f7f9;
-        position: relative;
-        border-radius: 4px;
-        overflow: hidden;
-        .layout-footer-center{
-            text-align: center;
-        }
-        .fixed-block {
-          position: fixed;
-          // width: 100px;
-          // height: 100px;
-          right: 0px;
-          cursor: pointer;
-          padding: 8px;
-          .icon-music {
-            font-size: 16px;
-            animation: rotate 1s linear infinite;
-          }
-        }
-        .wangyi-music {
-          position: fixed;
-          right: -330px;
-          z-index: 11;
-          top: 200px;
-          transition: right 1s;
-          .active {
-            right: 0px;
-          }
-        }
+    to {
+        transform: rotate(360deg);
     }
+}
+.layout{
+    border: 1px solid #d7dde4;
+    background: #f5f7f9;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    .layout-footer-center{
+        text-align: center;
+    }
+    .fixed-block {
+      position: fixed;
+      // width: 100px;
+      // height: 100px;
+      right: 0px;
+      cursor: pointer;
+      padding: 8px;
+      .icon-music {
+        font-size: 16px;
+        animation: rotate 1s linear infinite;
+      }
+    }
+    .wangyi-music {
+      position: fixed;
+      right: -330px;
+      z-index: 11;
+      top: 200px;
+      transition: right 1s;
+      .active {
+        right: 0px;
+      }
+    }
+}
 </style>
