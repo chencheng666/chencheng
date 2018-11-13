@@ -75,4 +75,45 @@ e=>end
 st->op->cond
 cond(yes)->e
 cond(no)->op
-&```
+&
+```
+
+
+标记之外`hello world`标记之外
+
+[TOC]
+
+```javascript
+var num = 0;
+for (var i = 0; i < 5; i++) {
+    num+=i;
+}
+console.log(num);
+```
+
+- [x] 选项一
+- [ ] 选项二  
+- [ ]  [选项3]
+
+<p style="color: #AD5D0F;font-size: 30px; font-family: '宋体';">内联样式</p>
+
+<pre>
+hello world 
+         hi
+  hello world 
+</pre>
+
+$$ x \href{why-equal.html}{=} y^2 + 1 $$
+
+标题
+***********
+标题一
+--------
+标题二
+=========
+标题三
+==============
+
+[公式标题锚点](#1)
+
+<xxx@outlook.com>
