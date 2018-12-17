@@ -12,7 +12,9 @@
         <BackTop></BackTop>
       </Content>
       <!-- 底部 -->
-      <Footer class="layout-footer-center">2018-2020 &copy;chencheng</Footer>
+      <Footer class="layout-footer-center">2018-2020 &copy;chencheng
+        <span @click="loadFile('aa','aaaaaa')">下载测试</span>
+      </Footer>
     </Layout>
     <div class="fixed-block" draggable="true" @click="isActive=!isActive">
       <!-- <fs-audio></fs-audio> -->
@@ -40,12 +42,22 @@
           // FsAudio,
         },
         methods: {
-          init() {
-            let userInfo = JSON.parse(localStorage.getItem('userInfo'));
-            if(userInfo && userInfo.avatar) {
-              this.$store.dispatch('save',userInfo);
-            }
-          },
+			init() {
+				let userInfo = JSON.parse(localStorage.getItem('userInfo'));
+				if(userInfo && userInfo.avatar) {
+				this.$store.dispatch('save',userInfo);
+				}
+			},
+			loadFile(fileName, content){ // 前端自动生成下载文件
+				var aLink = document.createElement('a');
+				var blob = new Blob([content], {
+					type: 'text/plain'
+				});
+				aLink.download = fileName;
+				aLink.href = URL.createObjectURL(blob);
+				aLink.click();
+				URL.revokeObjectURL(blob);
+          }
         },
         created() {
           this.init();
