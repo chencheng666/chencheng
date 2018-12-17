@@ -26,50 +26,50 @@
   </div>
 </template>
 <script>
-    import FsContent from '@/components/common/fs-content'
-    // import FsAudio from '@/components/common/fs-audio'
-    export default {
-        name: 'App',
-        data() {
-          return {
-            menuItems: null,
-            dropList: null,
-            isActive:false
-          }
-        },
-        components: {
-          FsContent,
-          // FsAudio,
-        },
-        methods: {
-			init() {
-				let userInfo = JSON.parse(localStorage.getItem('userInfo'));
-				if(userInfo && userInfo.avatar) {
-				this.$store.dispatch('save',userInfo);
-				}
-			},
-			loadFile(fileName, content){ // 前端自动生成下载文件
-				var aLink = document.createElement('a');
-				var blob = new Blob([content], {
-					type: 'text/plain'
-				});
-				aLink.download = fileName;
-				aLink.href = URL.createObjectURL(blob);
-				aLink.click();
-				URL.revokeObjectURL(blob);
-          }
-        },
-        created() {
-          this.init();
+import FsContent from '@/components/common/fs-content'
+// import FsAudio from '@/components/common/fs-audio'
+export default {
+	name: 'App',
+	data() {
+		return {
+		menuItems: null,
+		dropList: null,
+		isActive:false
+		}
+	},
+	components: {
+		FsContent,
+		// FsAudio,
+	},
+	methods: {
+		init() {
+			let userInfo = JSON.parse(localStorage.getItem('userInfo'));
+			if(userInfo && userInfo.avatar) {
+			this.$store.dispatch('save',userInfo);
+			}
+		},
+		loadFile(fileName, content){ // 前端自动生成下载文件
+			var aLink = document.createElement('a');
+			var blob = new Blob([content], {
+				type: 'text/plain'
+			});
+			aLink.download = fileName;
+			aLink.href = URL.createObjectURL(blob);
+			aLink.click();
+			URL.revokeObjectURL(blob);
+		}
+	},
+	created() {
+		this.init();
 
-          // 添加监听事件 隐藏网易播放器
-          document.addEventListener('click', (e) => {
-            if(e.target.className !== 'fixed-block') {
-              this.isActive = false;
-            }
-          })
-        }
-    }
+		// 添加监听事件 隐藏网易播放器
+		document.addEventListener('click', (e) => {
+		if(e.target.className !== 'fixed-block') {
+			this.isActive = false;
+		}
+		})
+	}
+}
 </script>
 <style scoped lang="less">
 @keyframes rotate {
