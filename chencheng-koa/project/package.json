@@ -9,6 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
     "debug": "^2.6.3",
     "koa": "^2.2.0",
     "koa-bodyparser": "^3.2.0",
@@ -21,7 +22,8 @@
     "koa-views": "^5.2.1",
     "koa2-cors": "^2.0.5",
     "monk": "^6.0.6",
-    "pug": "^2.0.0-rc.1"
+    "pug": "^2.0.0-rc.1",
+    "request": "^2.88.0"
   },
   "devDependencies": {
     "nodemon": "^1.8.1"

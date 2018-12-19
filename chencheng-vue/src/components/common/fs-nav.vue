@@ -106,6 +106,11 @@ export default {
           }},
           {text:'反馈', code:'note', icon:'ios-paper',onclick() {
             window.open('https://www.baidu.com');
+		  }},
+		  {text:'工具', code:'tool', icon:'ios-paper',onclick() {
+            _this.$router.push({
+              name: 'tool'
+            });
           }},
         ];
         if(this.getUserInfo && Object.keys(this.getUserInfo).length) { // 已登录状态显示个人中心

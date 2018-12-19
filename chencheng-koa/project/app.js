@@ -10,6 +10,7 @@ const cors = require('koa2-cors') // 跨域
 const index = require('./routes/index')
 const users = require('./routes/users')
 const content = require('./routes/content')
+const crawler = require('./routes/pic-crawler')
 
 // error handler
 onerror(app)
@@ -39,6 +40,7 @@ app.use(async (ctx, next) => {
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 app.use(content.routes(), content.allowedMethods())
+app.use(crawler.routes(), crawler.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
