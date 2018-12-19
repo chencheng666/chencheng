@@ -9,7 +9,7 @@ router.prefix('/pic-crawler');
 router.post('/get', async (ctx, next) => { // 添加文章
   if(ctx.request.body && 
     ctx.request.body.url &&
-    /^(https?:\/\/)?www\./.test(ctx.request.body.url)) {
+    /^(https?:\/\/)?(www\.)?/.test(ctx.request.body.url)) {
       await start(ctx.request.body.url).then(res => {
         ctx.response.body = {
           result: {code: 'success', msg: '成功', cb: res}
