@@ -2,9 +2,9 @@
   <div class="content-write">
     <div class="content-body">
         <div class="article-item article-title">
-            <div class="left">网站地址</div>
+            <div class="left">网址</div>
             <div class="right">
-                <Input v-model="url" placeholder="需要爬取的图片网站" style="width: 300px"></Input>
+                <Input v-model="url" suffix="ios-search" :placeholder="placeholder" style="width: 300px"></Input>
             </div>
         </div>
         <div class="article-item article-footer">
@@ -12,11 +12,15 @@
         </div>
     </div>
     <div class="tool-list">
-        <div class="tool-item" v-for="(item,index) in imgList" :key="index" @click="item.onclick && item.onclick">
-            <!-- <div class="title">{{item.name}}</div> -->
-            <img :src="item.originPath" alt="">
+        <div class="tool-item" draggable="true" v-for="(item,index) in imgList" :key="index" @click="showImage(item)" :style="{'background': `url(${$http.defaults.baseURL + item.publicPath})`,'background-repeat':'no-repeat','background-size':'cover'}">
+            <!-- <img :src="$http.defaults.baseURL + item.publicPath" alt=""> -->
         </div>
     </div>
+    <Spin size="large" fix v-if="loading"></Spin>
+    <!-- 图片放大Modal -->
+    <Modal title="查看大图" v-model="showImg" @on-ok="downLoadImg()" ok-text="下载">
+        <img :src="imgSrcForShow" style="width: 100%">
+    </Modal>
   </div>
 </template>
 <script>
@@ -24,25 +28,62 @@
         data() {
           return {
             url: '',
-            imgList: []
+            imgList: [],
+            loading: false,
+            timer: null,
+            placeholder: 'https://m.mzitu.com/hot/',
+            showImg: false,
+            imgSrcForShow: ''
           }
         },
         components: {
         },
         methods: {
-          init() {
-          },
-          confirm() { // 获取详细数据
-            let data = {
-                url: this.url,
+            downLoadImg() {
+                debugger;
+                let aLink = document.createElement('a');
+                aLink.download = this.imgSrcForShow.match(/[^\/]*?\.(jpe?g|png|gif|svg)/ig)[0];
+                aLink.href = window.URL.createObjectURL(this.imgSrcForShow);
+                document.body.appendChild(aLink);
+                aLink.click();
+            },
+            showImage(item) {
+                this.imgSrcForShow = this.$http.defaults.baseURL + item.publicPath;
+                this.showImg = true;
+            },
+            init() {
+            },
+            confirm() { // 获取详细数据
+                this.url = this.url || this.placeholder;
+                if(!this.url) {
+                    this.$Message.warning('请输入网址');
+                    return;
+                } else if(!/(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?/gi.test(this.url)) {
+                    this.$Message.warning('网址不正确');
+                    return;
+                }
+                let data = {
+                    url: this.url,
+                }
+                this.loading = true;
+                this.$http.post('/pic-crawler/get', data).then(res => {
+                    console.log(res, 'res');
+                    this.loading = false;
+                    this.imgList = res && res.data && res.data.result && (res.data.result.cb instanceof Array) && res.data.result.cb || [];
+                }).catch(e => {
+                    this.loading = false;
+                    this.$Message.error('失败');
+                    console.log(e, 'e');
+                });
+
+                this.timer = setTimeout(() => {
+                    if(this.loading) {
+                        this.loading = false;
+                        this.$Message.warning('抓取超时');
+                    }
+                    clearTimeout(this.timer);
+                },10000)
             }
-            this.$http.post('/pic-crawler/get', data).then(res => {
-                console.log(res, 'res');
-                this.imgList = res && res.data && res.data.result&& res.data.result.cb || [];
-            }).catch(e => {
-                console.log(e, 'e');
-            });
-          }
         },
         created() {
           this.init();

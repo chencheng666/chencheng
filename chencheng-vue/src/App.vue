@@ -13,7 +13,12 @@
       </Content>
       <!-- 底部 -->
       <Footer class="layout-footer-center">2018-2020 &copy;chencheng
-        <span @click="loadFile('aa','aaaaaa')">下载测试</span>
+        <!-- <span @click="loadFile('aa','aaaaaa')">下载测试</span> -->
+        <div>
+			<span @click="getLoginTimer">
+				{{`登录时间：${loginTimer} s`}}
+			</span>
+		</div>
       </Footer>
     </Layout>
     <div class="fixed-block" draggable="true" @click="isActive=!isActive">
@@ -32,9 +37,14 @@ export default {
 	name: 'App',
 	data() {
 		return {
-		menuItems: null,
-		dropList: null,
-		isActive:false
+			menuItems: null,
+			dropList: null,
+			isActive:false,
+			loginTimer: 0,
+			timer: null,
+			isPause: false,
+			startTime: 0,
+			endTime: 0
 		}
 	},
 	components: {
@@ -45,9 +55,26 @@ export default {
 		init() {
 			let userInfo = JSON.parse(localStorage.getItem('userInfo'));
 			if(userInfo && userInfo.avatar) {
-			this.$store.dispatch('save',userInfo);
+				this.$store.dispatch('save',userInfo);
 			}
+			this.startTime = Date.now();
+			this.getLoginTimer();
 		},
+		getLoginTimer() {
+
+			if(!this.isPause) {
+				this.timer = setInterval(() => {
+					this.endTime = Date.now();
+					this.loginTimer = Math.floor((this.endTime - this.startTime)/1000);
+				},1000);
+			} else {
+				clearInterval(this.timer);
+			}
+			this.isPause = !this.isPause;
+		},
+		// clearLoginTimer() {
+		// 	clearTimeout(this.timer);
+		// },
 		loadFile(fileName, content){ // 前端自动生成下载文件
 			var aLink = document.createElement('a');
 			var blob = new Blob([content], {
@@ -68,6 +95,9 @@ export default {
 			this.isActive = false;
 		}
 		})
+	},
+	destroyed() {
+		clearInterval(this.timer);
 	}
 }
 </script>
